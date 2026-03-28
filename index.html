@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Waye's Portfolio</title>
-    
+
     <!-- Syne Font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    
+
     <!-- Babel for JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
@@ -72,7 +72,7 @@
             overflow-x: hidden;
             cursor: none;
         }
-        
+
         /* Custom Cursor */
         .custom-cursor {
             position: fixed;
@@ -141,7 +141,7 @@
         .hover-lift {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .hover-lift:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
@@ -174,7 +174,7 @@
 
         /* Grid Pattern Background */
         .grid-bg {
-            background-image: 
+            background-image:
                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
@@ -241,28 +241,28 @@
         // =====================================================
         // 📝 个人作品集网站配置区域
         // =====================================================
-        // 
+        //
         // ⚠️  重要说明：
         // 修改下面的配置来自定义你的网站
-        // 
+        //
         // =====================================================
 
         // --- 🏷️ 网站基本信息 ---
         const SITE_CONFIG = {
             // 网站标题
-            title: "Waye's Portfolio",
-            
+            title: "王一凡的作品",
+
             // 网站名称
             siteName: "Waye's Portfolio",
-            
+
             // 个人简介
-            description: "A creative designer crafting digital experiences with passion and precision. Specializing in Amazon page, Logo Design design, and visual storytelling.",
-            
+            description: "10年跨境电商设计行业从业经历，涉及设计品类/设计内容/设计职能等方面经验丰富.学习驱动能力：一路以来自学：美术基础/板式/字体/合成/C4D。目前智能体搭建学习中，通过打造智能体解决重复性设计需求。",
+
             // 联系电话
             contactPhone: "13142276110",
-            
+
             // 头像图片链接
-            avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop"
+            avatar: "https://media.discordapp.net/attachments/1487289155313467404/1487300707190046871/74ec241b26b4b34c.jpg?ex=69c8a439&is=69c752b9&hm=b3e289670b645e091e733ceab4ecece5dafa876ed8306d1faf74fbb90bb0f3bd&=&format=webp&width=1199&height=1199"
         };
 
         // --- 📂 作品模块列表 ---
@@ -274,21 +274,22 @@
                 items: [
                     {
                         id: 1,
-                        title: "Neon Genesis",
-                        subtitle: "Tech Startup Amazon page",
+                        title: "Lamp",
+                        subtitle: "Lamp product image design",
                         images: [
-                            "https://m.media-amazon.com/images/I/710OelrFvSL._AC_SL1500_.jpg",
-                            "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1200&auto=format&fit=crop",
+                            "https://media.discordapp.net/attachments/1487289155313467404/1487296835885334568/1-1.jpg?ex=69c8a09e&is=69c74f1e&hm=96a3123deecabb2b39acc2f2952eda4633aed2e6a6cdec6596fd5086920f9206&=&format=webp",
+                            "https://media.discordapp.net/attachments/1487289155313467404/1487297668341301258/1-2.jpg?ex=69c8a164&is=69c74fe4&hm=2a269f5eed5caf43ca3066c76d0f198f9cb91792c7505511e4b2451ca27279fc&=&format=webp",
                             "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop"
                         ],
                         description: "A futuristic brand identity project exploring neon aesthetics and 3D visual elements for a tech startup. The project included logo design, brand guidelines, and various marketing materials with a focus on cyberpunk-inspired visuals."
                     },
                     {
                         id: 2,
-                        title: "Cyber Deck",
+                        title: "Massage",
                         subtitle: "Product Design Concept",
                         images: [
-                            "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop"
+                            "https://media.discordapp.net/attachments/1487289155313467404/1487304111249686538/3._1.jpg?ex=69c8a764&is=69c755e4&hm=daa1b8585ce59ade449370797ec34ea020c0422f7218e908f9be2e6201acc855&=&format=webp&width=959&height=1199",
+                            "https://media.discordapp.net/attachments/1487289155313467404/1487304111249686538/3._1.jpg?ex=69c8a764&is=69c755e4&hm=daa1b8585ce59ade449370797ec34ea020c0422f7218e908f9be2e6201acc855&=&format=webp&width=959&height=1199"
                         ],
                         description: "Product design concept inspired by cyberpunk aesthetics, featuring holographic interfaces and neon accents. The design incorporates futuristic UI elements and dark themes."
                     },
@@ -367,7 +368,7 @@
                         ],
                         description: "Conceptual architectural visualization featuring minimalist design principles and negative space exploration. This project aimed to create a digital experience that reflects modern architecture."
                     },
-                    
+
                 ]
             },
             {
@@ -449,11 +450,11 @@
 
             return (
                 <div>
-                    <div 
+                    <div
                         className="custom-cursor cursor-dot"
                         style={{ left: position.x, top: position.y }}
                     />
-                    <div 
+                    <div
                         className={`custom-cursor cursor-ring ${hovered ? 'hover' : ''} ${clicked ? 'click' : ''}`}
                         style={{ left: position.x, top: position.y }}
                     />
@@ -496,13 +497,13 @@
                         {SITE_CONFIG.description}
                     </p>
                     <div className="mt-12 flex justify-center animate-fade-in-up" style={{animationDelay: '0.4s'}}>
-                        <a 
-                            href="#work" 
+                        <a
+                            href="#work"
                             className="w-32 h-32 rounded-full overflow-hidden border-4 border-white/20 hover:border-neon-blue/50 transition-all shadow-2xl cursor-pointer"
                             style={{animation: 'glow 2s ease-in-out infinite alternate'}}
                         >
-                            <img 
-                                src={SITE_CONFIG.avatar} 
+                            <img
+                                src={SITE_CONFIG.avatar}
                                 alt="Avatar"
                                 className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                             />
@@ -548,11 +549,11 @@
             };
 
             return (
-                <div 
+                <div
                     className="fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4"
                     onClick={handleBackdropClick}
                 >
-                    <div 
+                    <div
                         ref={modalRef}
                         className="relative max-w-5xl w-full max-h-[90vh] flex flex-col bg-zinc-900 rounded-2xl overflow-hidden shadow-2xl"
                     >
@@ -562,7 +563,7 @@
                                 <h2 className="text-2xl font-bold text-white font-syne">{item.title}</h2>
                                 <p className="text-zinc-400 text-sm">{item.subtitle}</p>
                             </div>
-                            <button 
+                            <button
                                 onClick={onClose}
                                 className="w-10 h-10 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors flex items-center justify-center cursor-pointer"
                             >
@@ -576,16 +577,16 @@
                         <div className="flex-1 overflow-y-auto">
                             {/* 优化3：高度自适应的图片容器 */}
                             <div className="relative w-full bg-black flex items-center justify-center min-h-[300px]">
-                                <img 
-                                    src={item.images[currentIndex]} 
+                                <img
+                                    src={item.images[currentIndex]}
                                     alt={`${item.title} - Image ${currentIndex + 1}`}
                                     className="max-w-full max-h-[70vh] object-contain carousel-slide"
                                     style={{ maxHeight: '70vh' }}
                                 />
-                                
+
                                 {item.images.length > 1 && (
                                     <div>
-                                        <button 
+                                        <button
                                             onClick={prevImage}
                                             className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors flex items-center justify-center cursor-pointer"
                                         >
@@ -593,7 +594,7 @@
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                             </svg>
                                         </button>
-                                        <button 
+                                        <button
                                             onClick={nextImage}
                                             className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors flex items-center justify-center cursor-pointer"
                                         >
@@ -601,7 +602,7 @@
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                             </svg>
                                         </button>
-                                        
+
                                         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-black/70 text-white text-sm">
                                             {currentIndex + 1} / {item.images.length}
                                         </div>
@@ -621,12 +622,12 @@
         };
 
         const GalleryItem = ({ item, onClick }) => (
-            <div 
+            <div
                 className="gallery-item group relative rounded-xl overflow-hidden cursor-pointer hover-lift"
                 onClick={() => onClick(item)}
             >
-                <img 
-                    src={item.images[0]} 
+                <img
+                    src={item.images[0]}
                     alt={item.title}
                     className="w-full h-full object-cover transition-transform duration-500 aspect-[3/4]"
                 />
@@ -664,9 +665,9 @@
 
                         <div className={getGridClass()}>
                             {section.items.map((item, index) => (
-                                <GalleryItem 
-                                    key={item.id} 
-                                    item={item} 
+                                <GalleryItem
+                                    key={item.id}
+                                    item={item}
                                     onClick={onItemClick}
                                 />
                             ))}
@@ -710,8 +711,8 @@
             const allCategories = ['All', ...WORK_SECTIONS.map(s => s.id)];
 
             // 过滤显示的分类
-            const filteredSections = activeCategory === 'All' 
-                ? WORK_SECTIONS 
+            const filteredSections = activeCategory === 'All'
+                ? WORK_SECTIONS
                 : WORK_SECTIONS.filter(section => section.id === activeCategory);
 
             if (!mounted) return null;
@@ -726,12 +727,12 @@
                         <div className="max-w-7xl mx-auto px-6 py-8">
                             <div className="flex justify-center gap-3 flex-wrap">
                                 {allCategories.map((category) => (
-                                    <button 
+                                    <button
                                         key={category}
                                         onClick={() => setActiveCategory(category)}
                                         className={`category-tab px-6 py-2 rounded-lg text-sm font-syne cursor-pointer ${
-                                            activeCategory === category 
-                                                ? 'active' 
+                                            activeCategory === category
+                                                ? 'active'
                                                 : 'bg-zinc-800/50 text-zinc-400'
                                         }`}
                                     >
@@ -743,16 +744,16 @@
 
                         {/* Work Sections */}
                         {filteredSections.map((section, index) => (
-                            <WorkSection 
-                                key={section.id} 
-                                section={section} 
+                            <WorkSection
+                                key={section.id}
+                                section={section}
                                 onItemClick={handleItemClick}
                             />
                         ))}
                     </main>
                     <Footer />
-                    
-                    <ProjectModal 
+
+                    <ProjectModal
                         item={selectedItem}
                         isOpen={isModalOpen}
                         onClose={handleCloseModal}
