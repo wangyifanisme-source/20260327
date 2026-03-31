@@ -81,10 +81,10 @@
         .waterfall-item img { width: 100%; height: auto; display: block; }
         .waterfall-item .overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%); padding: 1rem; opacity: 0; transition: opacity 0.3s ease; }
         .waterfall-item:hover .overlay { opacity: 1; }
-        .fade-mask { position: absolute; bottom: 0; left: 0; right: 0; height: 60%; background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%); pointer-events: none; }
+        /* 移除 fade-mask 样式，不再使用底部渐变层 */
 
-        /* 横向滑动模块 (Marketing webpage design 和 包材设计) */
-        .swiper-container { overflow-x: scroll; overflow-y: hidden; scrollbar-width: none; -ms-overflow-style: none; position: relative; }
+        /* 横向滑动模块 (Marketing webpage design、包装设计、LOGO设计) */
+        .swiper-container { overflow-x: scroll; overflow-y: hidden; scrollbar-width: none; -ms-overflow-style: none; position: relative; scroll-behavior: smooth; }
         .swiper-container::-webkit-scrollbar { display: none; }
         .swiper-wrapper { display: flex; gap: 1.5rem; padding: 2rem 0; }
         .swiper-slide { flex-shrink: 0; width: 60%; min-width: 300px; max-width: 500px; }
@@ -99,11 +99,11 @@
         .swiper-nav-btn.right { right: 12px; }
         @media (max-width: 640px) { .swiper-nav-btn { width: 36px; height: 36px; } .swiper-nav-btn.left { left: 4px; } .swiper-nav-btn.right { right: 4px; } }
 
-        /* Banner 模块优化 - 固定高度650px（桌面），图片居中，按钮固定位置 */
+        /* Banner 模块 - 固定高度650px，淡入淡出切换 */
         .banner-container {
             position: relative;
             width: 100%;
-            height: 650px; /* 修改为650px */
+            height: 650px;
             background: #000;
             overflow: hidden;
             border-radius: 1rem;
@@ -118,7 +118,11 @@
             height: auto;
             object-fit: contain;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: opacity 0.3s ease-in-out;
+            opacity: 1;
+        }
+        .banner-image.fade-out {
+            opacity: 0;
         }
         .banner-image:hover {
             transform: scale(1.02);
@@ -149,7 +153,7 @@
         .banner-arrow.left { left: 20px; }
         .banner-arrow.right { right: 20px; }
         @media (max-width: 768px) {
-            .banner-container { height: 450px; }  /* 移动端适当增高，保持舒适 */
+            .banner-container { height: 450px; }
             .banner-arrow { width: 36px; height: 36px; }
             .banner-arrow.left { left: 10px; }
             .banner-arrow.right { right: 10px; }
@@ -235,23 +239,25 @@
                 subtitle: "创意合成与营销海报",
                 items: [
                     { id: 17, title: "Fashion Banner", subtitle: "时尚视觉",
-                        images: ["https://cdn.imgos.cn/vip/2026/03/30/69ca93fa1253f.jpg",
+                        images: ["https://cdn.imgos.cn/vip/2026/03/30/69ca511982f5d.jpg",
+                             "https://cdn.imgos.cn/vip/2026/03/30/69ca51195d009.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/30/69ca93fa1253f.jpg",
                             "https://cdn.imgos.cn/vip/2026/03/30/69ca93f91dc1e.jpg",
                              "https://cdn.imgos.cn/vip/2026/03/30/69ca93f983b4a.jpg",
-                            "https://cdn.imgos.cn/vip/2026/03/30/69ca511982f5d.jpg",
-                             "https://cdn.imgos.cn/vip/2026/03/30/69ca51195d009.jpg",
                              "https://cdn.imgos.cn/vip/2026/03/30/69ca93fa3c254.jpg",
                              "https://cdn.imgos.cn/vip/2026/03/30/69ca93fa2e990.jpg",
                              "https://cdn.imgos.cn/vip/2026/03/30/69ca93f99c48d.jpg",
                             "https://cdn.imgos.cn/vip/2026/03/30/69ca51195ed71.jpg",
                             "https://cdn.imgos.cn/vip/2026/03/30/69ca5119499fc.jpg",
-                            "",
-                            "",
-                            ""
+                            "https://cdn.imgos.cn/vip/2026/03/30/69ca93f879336.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/30/69ca93f84f6d4.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/30/69ca93f81107a.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/30/69ca93f95da74.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/30/69ca93f979d44.jpg"
                                 ], description: "" }
                 ]
             },
-            // 新增：包装设计模块（横向滑动）
+            // 包装设计模块（横向滑动）
             {
                 id: "packaging",
                 title: "包装设计",
@@ -263,42 +269,115 @@
                     { id: 21, title: "", subtitle: "", images: ["https://cdn.imgos.cn/vip/2026/03/30/69ca52534580a.jpg"], description: "" }
                 ]
             },
-            // 新增：企业文化模块（网格布局）
+            // 企业文化模块（网格布局，16:9比例）
             {
                 id: "corporate",
                 title: "企业文化",
                 subtitle: "团队活动·办公环境·品牌故事",
                 items: [
-                    { id: 22, title: "", subtitle: "", images: ["https://cdn.imgos.cn/vip/2026/03/30/69ca9afd6e0ea.jpg",
-                            "https://cdn.imgos.cn/vip/2026/03/30/69ca9afd0955b.jpg"
+                    { id: 22, title: "", subtitle: "", images: ["https://cdn.imgos.cn/vip/2026/03/31/69cb90e6449bb.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/31/69cb90e639427.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/31/69cb90e5b4d84.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/31/69cb90e65b2ba.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/31/69cb90e64e75a.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/31/69cb90e64bfe7.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/31/69cb90e5a2e81.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/31/69cb90e58959c.jpg"
                         ], description: "" },
-                    { id: 23, title: "", subtitle: "", images: ["https://cdn.imgos.cn/vip/2026/03/30/69ca9afd47403.jpg",
-                            "https://cdn.imgos.cn/vip/2026/03/30/69ca9afd4dbb4.jpg"
+                    { id: 23, title: "", subtitle: "", images: ["https://cdn.imgos.cn/vip/2026/03/31/69cb958563203.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/31/69cb96978b969.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/31/69cb96d506ca4.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/31/69cb96e6baf33.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/31/69cb9707c91e8.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/31/69cb97305e4b0.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/31/69cb974980771.jpg",
+                            "https://cdn.imgos.cn/vip/2026/03/31/69cb97684401f.jpg"
+
                         ], description: "跨部门协作，激发灵感。" }
+                ]
+            },
+            // LOGO设计模块（横向滑动）
+            {
+                id: "logo",
+                title: "LOGO设计",
+                subtitle: "品牌标识创意 · 标志设计案例，左右滑动浏览更多",
+                items: [
+                    { id: 24, title: "", subtitle: "", images: ["https://cdn.imgos.cn/vip/2026/04/01/69cbfa11711be.jpg",
+                            "https://cdn.imgos.cn/vip/2026/04/01/69cbf5bd4e6dd.jpg"
+                        ], description: "悦榕山居" },
+                    { id: 25, title: "", subtitle: "", images: ["https://cdn.imgos.cn/vip/2026/04/01/69cbf5bd71786.jpg"], description: "禅清茶" },
+                    { id: 26, title: "", subtitle: "", images: ["https://cdn.imgos.cn/vip/2026/04/01/69cbf5bbe19d8.jpg",
+                            "https://cdn.imgos.cn/vip/2026/04/01/69cbf5be8916c.jpg",
+                            "https://cdn.imgos.cn/vip/2026/04/01/69cbf5bd66fd7.jpg",
+                            "https://cdn.imgos.cn/vip/2026/04/01/69cbf5be48393.jpg"
+                        ], description: "wenkiana" },
+                    { id: 27, title: "", subtitle: "", images: ["https://cdn.imgos.cn/vip/2026/04/01/69cbf3d7ae81b.jpg",
+                        "https://cdn.imgos.cn/vip/2026/04/01/69cbf5bec5f4f.jpg",
+                        "https://cdn.imgos.cn/vip/2026/04/01/69cbf5be746e0.jpg",
+                        "https://cdn.imgos.cn/vip/2026/04/01/69cbf5be41de9.jpg"
+                        ], description: "katalic" },
+                    { id: 28, title: "", subtitle: "", images: ["https://cdn.imgos.cn/vip/2026/04/01/69cbf5bbad76b.jpg",
+                        "https://cdn.imgos.cn/vip/2026/04/01/69cbf5be67276.jpg",
+                        "https://cdn.imgos.cn/vip/2026/04/01/69cbf5be00616.jpg"
+                        ], description: "thgolf" },
+                    { id: 29, title: "", subtitle: "", images: ["https://cdn.imgos.cn/vip/2026/04/01/69cbf5bbbddd5.jpg",
+                        "https://cdn.imgos.cn/vip/2026/04/01/69cbf5be34cf4.jpg",
+                        "https://cdn.imgos.cn/vip/2026/04/01/69cbf5be6269b.jpg"
+                        ], description: "wenkia" },
+                    { id: 30, title: "", subtitle: "", images: ["https://cdn.imgos.cn/vip/2026/04/01/69cbf5bbf40af.jpg",
+                        "https://cdn.imgos.cn/vip/2026/04/01/69cbf5bc484bd.jpg",
+                        "https://cdn.imgos.cn/vip/2026/04/01/69cbf5be005b5.jpg"
+                        ], description: "diorok" },
+                    { id: 31, title: "", subtitle: "", images: ["https://cdn.imgos.cn/vip/2026/04/01/69cbf5bc4c4f9.jpg",
+                        "https://cdn.imgos.cn/vip/2026/04/01/69cbf5be447bd.jpg",
+                        "https://cdn.imgos.cn/vip/2026/04/01/69cbf5bebc4fb.jpg"
+                        ], description: "drawpow" }
                 ]
             }
         ];
 
         const WATERFALL_IMAGES = [
-            { id: 101, src: "https://cdn.imgos.cn/vip/2026/03/30/69c9f5339fb62.jpg", title: "Product Detail 1", subtitle: "Amazon Design" },
-            { id: 102, src: "https://cdn.imgos.cn/vip/2026/03/30/69ca5118ab7dc.jpg", title: "Product Detail 2", subtitle: "E-commerce Visual" },
-            { id: 103, src: "https://cdn.imgos.cn/vip/2026/03/30/69ca511892af4.jpg", title: "Product Detail 3", subtitle: "Brand Identity" },
-            { id: 104, src: "https://cdn.imgos.cn/vip/2026/03/30/69ca93f9206b3.jpg", title: "Product Detail 4", subtitle: "UI/UX Design" },
-            { id: 105, src: "https://cdn.imgos.cn/vip/2026/03/30/69ca93f8b6e93.jpg", title: "Product Detail 5", subtitle: "Creative Direction" },
-            { id: 106, src: "https://cdn.imgos.cn/vip/2026/03/29/69c8d679a1d30.jpg", title: "Product Detail 6", subtitle: "Visual Storytelling" },
-            { id: 107, src: "https://cdn.imgos.cn/vip/2026/03/29/69c8d684d7bab.jpg", title: "Product Detail 7", subtitle: "Motion Graphics" },
-            { id: 108, src: "https://cdn.imgos.cn/vip/2026/03/30/69ca51192674a.jpg", title: "Product Detail 8", subtitle: "3D Rendering" },
-            { id: 109, src: "https://cdn.imgos.cn/vip/2026/03/30/69ca5119a7c2c.jpg", title: "Product Detail 9", subtitle: "Photography" },
-            { id: 110, src: "https://cdn.imgos.cn/vip/2026/03/29/69c8d67964108.jpg", title: "Product Detail 2", subtitle: "E-commerce Visual" },
-            { id: 111, src: "https://cdn.imgos.cn/vip/2026/03/29/69c8ce23b68f1.jpg", title: "Product Detail 3", subtitle: "Brand Identity" },
-            { id: 112, src: "https://cdn.imgos.cn/vip/2026/03/29/69c8d67991384.jpg", title: "Product Detail 4", subtitle: "UI/UX Design" },
-            { id: 113, src: "https://cdn.imgos.cn/vip/2026/03/29/69c8d679a2298.jpg", title: "Product Detail 5", subtitle: "Creative Direction" },
-            { id: 114, src: "https://cdn.imgos.cn/vip/2026/03/29/69c8d679a1d30.jpg", title: "Product Detail 6", subtitle: "Visual Storytelling" },
-            { id: 115, src: "https://cdn.imgos.cn/vip/2026/03/29/69c8d684d7bab.jpg", title: "Product Detail 7", subtitle: "Motion Graphics" },
-            { id: 116, src: "https://cdn.imgos.cn/vip/2026/03/29/69c8db2f46e91.jpg", title: "Product Detail 8", subtitle: "3D Rendering" },
-            { id: 117, src: "https://cdn.imgos.cn/vip/2026/03/29/69c8db2f5ff91.jpg", title: "Product Detail 9", subtitle: "Photography" },
-            { id: 118, src: "https://cdn.imgos.cn/vip/2026/03/29/69c8db2f932c0.jpg", title: "Product Detail 10", subtitle: "Art Direction" }
-
+            { id: 101, src: "https://cdn.imgos.cn/vip/2026/03/30/69c9f5339fb62.jpg", title: "", subtitle: "" },
+            { id: 102, src: "https://cdn.imgos.cn/vip/2026/03/30/69ca5118ab7dc.jpg", title: "", subtitle: "" },
+            { id: 103, src: "https://cdn.imgos.cn/vip/2026/03/30/69ca511892af4.jpg", title: "", subtitle: "" },
+            { id: 104, src: "https://cdn.imgos.cn/vip/2026/03/30/69ca93f9206b3.jpg", title: "", subtitle: "" },
+            { id: 105, src: "https://cdn.imgos.cn/vip/2026/03/30/69ca93f8b6e93.jpg", title: "", subtitle: "" },
+            { id: 106, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9933500d1.jpg", title: "", subtitle: "" },
+            { id: 107, src: "https://cdn.imgos.cn/vip/2026/03/29/69c8d684d7bab.jpg", title: "", subtitle: "" },
+            { id: 108, src: "https://cdn.imgos.cn/vip/2026/03/30/69ca51192674a.jpg", title: "", subtitle: "" },
+            { id: 109, src: "https://cdn.imgos.cn/vip/2026/03/30/69ca5119a7c2c.jpg", title: "", subtitle: "" },
+            { id: 110, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9933946f6.jpg", title: "", subtitle: "" },
+            { id: 111, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7a3c948.jpg", title: "", subtitle: "" },
+            { id: 112, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9933add4a.jpg", title: "", subtitle: "" },
+            { id: 113, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7b58739.jpg", title: "", subtitle: "" },
+            { id: 114, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9933e55be.jpg", title: "", subtitle: "" },
+            { id: 115, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7b48031.jpg", title: "", subtitle: "" },
+            { id: 116, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7b353ba.jpg", title: "", subtitle: "" },
+            { id: 117, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7bd80d4.jpg", title: "", subtitle: "" },
+            { id: 118, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7ba47b2.jpg", title: "", subtitle: "" },
+            { id: 119, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7c4bc08.jpg", title: "", subtitle: "" },
+            { id: 120, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7bf1019.jpg", title: "", subtitle: "" },
+            { id: 121, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7c978d9.jpg", title: "", subtitle: "" },
+            { id: 122, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7cc7bb7.jpg", title: "", subtitle: "" },
+            { id: 123, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7ca7753.jpg", title: "", subtitle: "" },
+            { id: 124, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7e12b53.jpg", title: "", subtitle: "" },
+            { id: 125, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7d86204.jpg", title: "", subtitle: "" },
+            { id: 126, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7db8bd9.jpg", title: "", subtitle: "" },
+            { id: 127, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7dc3c16.jpg", title: "", subtitle: "" },
+            { id: 128, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7d77b30.jpg", title: "", subtitle: "" },
+            { id: 129, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7ddaed6.jpg", title: "", subtitle: "" },
+            { id: 130, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7df38ad.jpg", title: "", subtitle: "" },
+            { id: 131, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7de7b35.jpg", title: "", subtitle: "" },
+            { id: 132, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7d6e7c7.jpg", title: "", subtitle: "" },
+            { id: 133, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7d8e064.jpg", title: "", subtitle: "" },
+            { id: 134, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7dc3c48.jpg", title: "", subtitle: "" },
+            { id: 135, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7d3683b.jpg", title: "", subtitle: "" },
+            { id: 136, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7dbbeba.jpg", title: "", subtitle: "" },
+            { id: 137, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7e1e1fb.jpg", title: "", subtitle: "" },
+            { id: 138, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7dd2e21.jpg", title: "", subtitle: "" },
+            { id: 139, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7d9f26b.jpg", title: "", subtitle: "" },
+            { id: 140, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7d3764e.jpg", title: "", subtitle: "" },
+            { id: 141, src: "https://cdn.imgos.cn/vip/2026/03/31/69cb9f7d7cec8.jpg", title: "", subtitle: "" }
         ];
 
         const FOOTER_TEXT = "© 2025 Waye's Portfolio. All rights reserved.";
@@ -321,7 +400,7 @@
             if (viewMode === 'original') {
                 return (
                     <div className="fullscreen-image-container" style={{ position: 'fixed', inset: 0, zIndex: 60, background: 'rgba(0,0,0,0.98)', overflow: 'auto', textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
-                        <div style={{ padding: '20px 0', minHeight: '100%' }}><img src={item.images[currentIndex]} alt="" onClick={toggleViewMode} style={{ maxWidth: 'none', maxHeight: 'none', width: 'auto', height: 'auto', display: 'inline-block', cursor: 'pointer' }} /></div>
+                        <div style={{ padding: '20px 0', minHeight: '100%' }}><img src={item.images[currentIndex]} alt="" onClick={toggleViewMode} style={{ maxWidth: 'none', maxHeight: 'none', width: 'auto', height: 'auto', display: 'inline-block', cursor: 'pointer' }} loading="lazy" /></div>
                         <div className="absolute top-0 left-0 right-0 flex justify-between items-center p-6 pointer-events-none"><button onClick={onClose} className="pointer-events-auto w-12 h-12 rounded-full bg-black/70 text-white hover:bg-black/90 flex items-center justify-center"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg></button><div className="bg-black/70 text-white px-4 py-2 rounded-full">{item.title} - {currentIndex+1}/{item.images.length}</div><button onClick={toggleViewMode} className="pointer-events-auto w-12 h-12 rounded-full bg-black/70 text-white hover:bg-black/90 flex items-center justify-center"><div className="text-xs">适应屏幕</div></button></div>
                         {item.images.length > 1 && (<><button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 text-white hover:bg-black/70 flex items-center justify-center"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" /></svg></button><button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 text-white hover:bg-black/70 flex items-center justify-center"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg></button></>)}
                         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-full">点击图片恢复正常模式</div>
@@ -332,7 +411,7 @@
                 <div className="fixed inset-0 z-50 modal-backdrop flex items-center justify-center p-4" onClick={handleBackdrop}>
                     <div className="relative max-w-5xl w-full max-h-[90vh] flex flex-col bg-zinc-900 rounded-2xl overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
                         <div className="flex justify-between items-center p-6 border-b border-white/5"><div><h2 className="text-2xl font-bold text-white font-syne">{item.title}</h2><p className="text-zinc-400 text-sm">{item.subtitle}</p></div><button onClick={onClose} className="w-10 h-10 rounded-full bg-black/50 text-white hover:bg-black/70 flex items-center justify-center"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg></button></div>
-                        <div className="flex-1 overflow-y-auto"><div className="relative w-full bg-black flex items-center justify-center min-h-[300px]"><img src={item.images[currentIndex]} alt="" onClick={toggleViewMode} className="max-w-full max-h-[70vh] object-contain cursor-pointer" />{item.images.length > 1 && (<><button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 text-white hover:bg-black/70 flex items-center justify-center"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" /></svg></button><button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 text-white hover:bg-black/70 flex items-center justify-center"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg></button><div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-black/70 text-white text-sm">{currentIndex+1}/{item.images.length}</div></>)}<div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/70 text-white text-xs">点击图片查看原图尺寸</div></div><div className="p-8"><p className="text-zinc-300 leading-relaxed text-lg">{item.description || "设计作品详情"}</p></div></div>
+                        <div className="flex-1 overflow-y-auto"><div className="relative w-full bg-black flex items-center justify-center min-h-[300px]"><img src={item.images[currentIndex]} alt="" onClick={toggleViewMode} className="max-w-full max-h-[70vh] object-contain cursor-pointer" loading="lazy" />{item.images.length > 1 && (<><button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 text-white hover:bg-black/70 flex items-center justify-center"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" /></svg></button><button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/50 text-white hover:bg-black/70 flex items-center justify-center"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg></button><div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-black/70 text-white text-sm">{currentIndex+1}/{item.images.length}</div></>)}<div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/70 text-white text-xs">点击图片查看原图尺寸</div></div><div className="p-8"><p className="text-zinc-300 leading-relaxed text-lg">{item.description || "设计作品详情"}</p></div></div>
                     </div>
                 </div>
             );
@@ -353,18 +432,17 @@
             return (<><div className="custom-cursor cursor-dot" style={{ left: pos.x, top: pos.y }} /><div className={`custom-cursor cursor-ring ${hover ? 'hover' : ''} ${click ? 'click' : ''}`} style={{ left: pos.x, top: pos.y }} /></>);
         };
         const Navbar = () => (<nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/5 px-6 py-4"><div className="max-w-7xl mx-auto flex justify-between items-center"><span className="text-white font-bold text-lg tracking-tight font-syne">{SITE_CONFIG.siteName}</span><span className="text-zinc-400 text-sm flex gap-2"><span className="font-bold">联系方式:</span><span className="text-white font-medium">{SITE_CONFIG.contactPhone}</span></span></div></nav>);
-        const Hero = () => (<section className="h-[800px] flex items-center justify-center relative overflow-hidden grid-bg"><div className="absolute inset-0"><div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-blue/5 rounded-full blur-3xl animate-float"></div><div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon-purple/5 rounded-full blur-3xl animate-float" style={{animationDelay:'1s'}}></div></div><div className="relative z-10 text-center px-6"><h1 className="text-5xl md:text-7xl font-bold text-white mb-6 font-syne">{SITE_CONFIG.siteName}</h1><p className="text-base md:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">{SITE_CONFIG.description}</p><div className="mt-12 flex justify-center"><a href="#work" className="w-32 h-32 rounded-full overflow-hidden border-4 border-white/20 hover:border-neon-blue/50 transition-all shadow-2xl"><img src={SITE_CONFIG.avatar} alt="avatar" className="w-full h-full object-cover hover:scale-110 transition-transform" /></a></div><div className="mt-4 text-zinc-500 text-sm">向下滚动查看作品</div></div></section>);
+        const Hero = () => (<section className="h-[800px] flex items-center justify-center relative overflow-hidden grid-bg"><div className="absolute inset-0"><div className="absolute top-1/4 left-1/4 w-96 h-96 bg-neon-blue/5 rounded-full blur-3xl animate-float"></div><div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon-purple/5 rounded-full blur-3xl animate-float" style={{animationDelay:'1s'}}></div></div><div className="relative z-10 text-center px-6"><h1 className="text-5xl md:text-7xl font-bold text-white mb-6 font-syne">{SITE_CONFIG.siteName}</h1><p className="text-base md:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">{SITE_CONFIG.description}</p><div className="mt-12 flex justify-center"><a href="#work" className="w-32 h-32 rounded-full overflow-hidden border-4 border-white/20 hover:border-neon-blue/50 transition-all shadow-2xl"><img src={SITE_CONFIG.avatar} alt="avatar" className="w-full h-full object-cover hover:scale-110 transition-transform" loading="lazy" /></a></div><div className="mt-4 text-zinc-500 text-sm">向下滚动查看作品</div></div></section>);
 
-        // 修改 GalleryItem 以支持动态比例
         const GalleryItem = ({ item, onClick, aspectRatio = 'aspect-[3/4]' }) => (
             <div className="gallery-item group relative rounded-xl overflow-hidden cursor-pointer hover-lift" onClick={() => onClick(item)}>
-                <img src={item.images[0]} alt={item.title} className={`w-full h-full object-cover transition-transform duration-500 ${aspectRatio}`} />
+                <img src={item.images[0]} alt={item.title} className={`w-full h-full object-cover transition-transform duration-500 ${aspectRatio}`} loading="lazy" />
                 <div className="image-overlay absolute inset-0 flex flex-col justify-end p-6"><h3 className="text-xl font-bold text-white mb-1">{item.title}</h3><p className="text-white/70 text-sm">{item.subtitle}</p></div>
                 <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center opacity-0 group-hover:opacity-100"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg></div>
             </div>
         );
 
-        // 包装模块（横向滑动）增加自动轮播
+        // 横向滑动模块（Marketing webpage design、包装设计、LOGO设计）优化自动轮播平滑滚动
         const HorizontalSwipeSection = ({ section, onItemClick }) => {
             const scrollRef = useRef(null);
             const timerRef = useRef(null);
@@ -374,15 +452,14 @@
                     if (!scrollRef.current) return;
                     const container = scrollRef.current;
                     const slideWidth = container.querySelector('.swiper-slide')?.offsetWidth || 320;
-                    const gap = 24; // gap 1.5rem ≈ 24px
+                    const gap = 24;
                     const scrollAmount = slideWidth + gap;
                     const maxScroll = container.scrollWidth - container.clientWidth;
                     let newScrollLeft = container.scrollLeft + scrollAmount;
                     if (newScrollLeft >= maxScroll - 5) {
-                        // 循环：瞬间回到起点
-                        container.scrollLeft = 0;
+                        container.scrollTo({ left: 0, behavior: 'smooth' });
                     } else {
-                        container.scrollLeft = newScrollLeft;
+                        container.scrollTo({ left: newScrollLeft, behavior: 'smooth' });
                     }
                 }, 5000);
             };
@@ -399,9 +476,9 @@
                         const maxScroll = scrollRef.current.scrollWidth - scrollRef.current.clientWidth;
                         let newScrollLeft = scrollRef.current.scrollLeft + scrollAmount;
                         if (newScrollLeft >= maxScroll - 5) {
-                            scrollRef.current.scrollLeft = 0;
+                            scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
                         } else {
-                            scrollRef.current.scrollLeft = newScrollLeft;
+                            scrollRef.current.scrollTo({ left: newScrollLeft, behavior: 'smooth' });
                         }
                     }, 5000);
                 };
@@ -423,16 +500,15 @@
                 else scrollRef.current?.scrollBy({ left: 320, behavior: 'smooth' });
                 resetTimer();
             };
-            return (<section className="py-24 px-6 border-b border-white/5"><div className="max-w-7xl mx-auto"><div className="mb-12"><h2 className="text-4xl md:text-5xl font-bold text-white mb-3">{section.title}</h2><p className="text-zinc-400 text-lg">{section.subtitle}</p></div><div className="relative"><div ref={scrollRef} className="swiper-container"><div className="swiper-wrapper">{section.items.map(item => (<div key={item.id} className="swiper-slide"><div className="group relative rounded-xl overflow-hidden cursor-pointer hover-lift" onClick={() => onItemClick(item)}><img src={item.images[0]} alt={item.title} className="w-full h-full object-cover aspect-[16/9]" /><div className="image-overlay absolute inset-0 flex flex-col justify-end p-6"><h3 className="text-xl font-bold text-white mb-1">{item.title}</h3><p className="text-white/70 text-sm">{item.subtitle}</p></div></div></div>))}</div></div><button onClick={() => handleArrowClick('left')} className="swiper-nav-btn left"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" /></svg></button><button onClick={() => handleArrowClick('right')} className="swiper-nav-btn right"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg></button></div></div></section>);
+            return (<section className="py-24 px-6 border-b border-white/5"><div className="max-w-7xl mx-auto"><div className="mb-12"><h2 className="text-4xl md:text-5xl font-bold text-white mb-3">{section.title}</h2><p className="text-zinc-400 text-lg">{section.subtitle}</p></div><div className="relative"><div ref={scrollRef} className="swiper-container"><div className="swiper-wrapper">{section.items.map(item => (<div key={item.id} className="swiper-slide"><div className="group relative rounded-xl overflow-hidden cursor-pointer hover-lift" onClick={() => onItemClick(item)}><img src={item.images[0]} alt={item.title} className="w-full h-full object-cover aspect-[16/9]" loading="lazy" /><div className="image-overlay absolute inset-0 flex flex-col justify-end p-6"><h3 className="text-xl font-bold text-white mb-1">{item.title}</h3><p className="text-white/70 text-sm">{item.subtitle}</p></div></div></div>))}</div></div><button onClick={() => handleArrowClick('left')} className="swiper-nav-btn left"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" /></svg></button><button onClick={() => handleArrowClick('right')} className="swiper-nav-btn right"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg></button></div></div></section>);
         };
 
-        // 修改 WorkSection 以支持动态比例传递
         const WorkSection = ({ section, onItemClick, aspectRatio = 'aspect-[3/4]' }) => {
             const getGridClass = () => { const len = section.items.length; if (len === 1) return 'gallery-grid one-col'; if (len === 2) return 'gallery-grid two-col'; return 'gallery-grid three-col'; };
             return (<section className="py-24 px-6 border-b border-white/5"><div className="max-w-7xl mx-auto"><div className="mb-12"><h2 className="text-4xl md:text-5xl font-bold text-white mb-3">{section.title}</h2><p className="text-zinc-400 text-lg">{section.subtitle}</p></div><div className={getGridClass()}>{section.items.map(item => <GalleryItem key={item.id} item={item} onClick={onItemClick} aspectRatio={aspectRatio} />)}</div></div></section>);
         };
 
-        // Banner 模块优化 - 固定高度650，增加自动轮播
+        // Banner 模块 - 无自动轮播，添加淡入淡出效果
         const BannerSection = ({ section, onImageClick }) => {
             const allImages = section.items.flatMap(item =>
                 item.images.map(imgUrl => ({
@@ -443,31 +519,26 @@
                 }))
             );
             const [currentIdx, setCurrentIdx] = useState(0);
+            const [fade, setFade] = useState(false);
             const [touchStart, setTouchStart] = useState(null);
             const [touchEnd, setTouchEnd] = useState(null);
-            const timerRef = useRef(null);
 
-            const prev = () => setCurrentIdx((prev) => (prev - 1 + allImages.length) % allImages.length);
-            const next = () => setCurrentIdx((prev) => (prev + 1) % allImages.length);
-
-            const resetTimer = () => {
-                if (timerRef.current) clearInterval(timerRef.current);
-                timerRef.current = setInterval(() => {
-                    next();
-                }, 5000);
+            const prev = () => {
+                setFade(true);
+                setTimeout(() => {
+                    setCurrentIdx((prev) => (prev - 1 + allImages.length) % allImages.length);
+                    setFade(false);
+                }, 200);
             };
-            useEffect(() => {
-                resetTimer();
-                return () => { if (timerRef.current) clearInterval(timerRef.current); };
-            }, [allImages.length]);
-            useEffect(() => {
-                resetTimer();
-            }, [currentIdx]);
+            const next = () => {
+                setFade(true);
+                setTimeout(() => {
+                    setCurrentIdx((prev) => (prev + 1) % allImages.length);
+                    setFade(false);
+                }, 200);
+            };
 
-            const handlePrev = () => { prev(); resetTimer(); };
-            const handleNext = () => { next(); resetTimer(); };
-
-            const handleTouchStart = (e) => { setTouchStart(e.targetTouches[0].clientX); resetTimer(); };
+            const handleTouchStart = (e) => { setTouchStart(e.targetTouches[0].clientX); };
             const handleTouchMove = (e) => { setTouchEnd(e.targetTouches[0].clientX); };
             const handleTouchEnd = () => {
                 if (!touchStart || !touchEnd) return;
@@ -476,7 +547,6 @@
                 if (Math.abs(distance) > threshold) {
                     if (distance > 0) prev();
                     else next();
-                    resetTimer();
                 }
                 setTouchStart(null);
                 setTouchEnd(null);
@@ -492,7 +562,6 @@
                     images: allImages.map(img => img.url)
                 };
                 onImageClick(fakeItem);
-                resetTimer();
             };
             return (
                 <section className="py-12 px-6 border-b border-white/5">
@@ -507,13 +576,13 @@
                             onTouchMove={handleTouchMove}
                             onTouchEnd={handleTouchEnd}
                         >
-                            <img src={current.url} alt={current.title} className="banner-image" onClick={handleClick} />
+                            <img src={current.url} alt={current.title} className={`banner-image ${fade ? 'fade-out' : ''}`} onClick={handleClick} loading="lazy" />
                             {allImages.length > 1 && (
                                 <>
-                                    <button onClick={handlePrev} className="banner-arrow left" aria-label="上一张">
+                                    <button onClick={prev} className="banner-arrow left" aria-label="上一张">
                                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" /></svg>
                                     </button>
-                                    <button onClick={handleNext} className="banner-arrow right" aria-label="下一张">
+                                    <button onClick={next} className="banner-arrow right" aria-label="下一张">
                                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg>
                                     </button>
                                 </>
@@ -527,11 +596,12 @@
             );
         };
 
+        // 瀑布流模块 - 移除每张图片底部的黑色渐变层
         const WaterfallSection = ({ images, onImageClick }) => {
             const [visible, setVisible] = useState(12);
             const loadMore = () => setVisible(p => Math.min(p+12, images.length));
             const displayed = images.slice(0, visible);
-            return (<section className="py-24 px-6 border-b border-white/5"><div className="max-w-7xl mx-auto"><div className="mb-12"><h2 className="text-4xl md:text-5xl font-bold text-white mb-3">更多作品</h2><p className="text-zinc-400 text-lg">浏览更多设计细节，点击图片查看大图</p></div><div className="waterfall-grid">{displayed.map(img => (<div key={img.id} className="waterfall-item group" onClick={() => onImageClick({ id: img.id, title: img.title, subtitle: img.subtitle, description: img.subtitle, images: [img.src] })}><img src={img.src} alt={img.title} className="transition-transform group-hover:scale-105" /><div className="fade-mask"></div><div className="overlay"><h3 className="text-white font-medium text-sm">{img.title}</h3><p className="text-white/70 text-xs">{img.subtitle}</p></div><div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg></div></div>))}</div>{visible < images.length && <div className="flex justify-center mt-12"><button onClick={loadMore} className="px-8 py-3 rounded-full bg-gradient-to-r from-neon-blue to-neon-purple text-white font-medium hover:shadow-lg transition-all">加载更多</button></div>}</div></section>);
+            return (<section className="py-24 px-6 border-b border-white/5"><div className="max-w-7xl mx-auto"><div className="mb-12"><h2 className="text-4xl md:text-5xl font-bold text-white mb-3">更多作品</h2><p className="text-zinc-400 text-lg">浏览更多设计细节，点击图片查看大图</p></div><div className="waterfall-grid">{displayed.map(img => (<div key={img.id} className="waterfall-item group" onClick={() => onImageClick({ id: img.id, title: img.title, subtitle: img.subtitle, description: img.subtitle, images: [img.src] })}><img src={img.src} alt={img.title} className="transition-transform group-hover:scale-105" loading="lazy" /><div className="overlay"><h3 className="text-white font-medium text-sm">{img.title}</h3><p className="text-white/70 text-xs">{img.subtitle}</p></div><div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100"><svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg></div></div>))}</div>{visible < images.length && <div className="flex justify-center mt-12"><button onClick={loadMore} className="px-8 py-3 rounded-full bg-gradient-to-r from-neon-blue to-neon-purple text-white font-medium hover:shadow-lg transition-all">加载更多</button></div>}</div></section>);
         };
 
         const FooterMessage = () => (<footer className="footer-message"><h3>感谢您的关注</h3><p>感谢您抽时间浏览我的作品，期待贵公司的面试机会。<br />请联系我：<span className="contact-highlight">{SITE_CONFIG.contactPhone}</span></p><p>感谢！</p></footer>);
@@ -544,9 +614,8 @@
             const cats = ['All', ...WORK_SECTIONS.map(s => s.id)];
             const filtered = activeCat === 'All' ? WORK_SECTIONS : WORK_SECTIONS.filter(s => s.id === activeCat);
             const handleItemClick = (item) => { setSelectedItem(item); setModalOpen(true); };
-            const useHorizontalSwipe = (sec) => sec.id === 'webdesign' || sec.id === 'packaging';
+            const useHorizontalSwipe = (sec) => sec.id === 'webdesign' || sec.id === 'packaging' || sec.id === 'logo';
             const isBanner = (sec) => sec.id === 'banner';
-            // 判断是否为企业文化模块，单独指定 16:9 比例
             const getWorkSectionProps = (sec) => {
                 if (sec.id === 'corporate') {
                     return { aspectRatio: 'aspect-[16/9]' };
